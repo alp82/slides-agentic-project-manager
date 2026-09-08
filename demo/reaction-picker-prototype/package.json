@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "visual-prototype": "vite --host 127.0.0.1 --port 5176 --strictPort --open /visual-prototype.html",
     "dev": "vite --host 127.0.0.1 --port 5174 --strictPort",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort"
