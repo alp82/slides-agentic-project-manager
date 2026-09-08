@@ -1,0 +1,44 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #f4f1e9;
+  background: #151716;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 850px;
+  padding: 10vh 32px;
+  margin: auto;
+}
+.eyebrow {
+  color: #d5f57b;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+h1 {
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 500;
+  letter-spacing: -3px;
+  line-height: 1.1;
+}
+em {
+  font-family: Georgia, serif;
+  color: #d5f57b;
+}
+p {
+  color: #b6beae;
+  line-height: 1.7;
+}
+.reactions {
+  font-size: 70px;
+  margin: 48px 0;
+}
+.note {
+  border-top: 1px solid #353a34;
+  padding-top: 24px;
+  font-size: 13px;
+}

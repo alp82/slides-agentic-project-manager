@@ -1,0 +1,19 @@
+{
+  "name": "agentic-project-manager-slides",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export",
+    "demo:install": "pnpm --dir demo/reaction-picker-prototype install && pnpm --dir demo/reaction-picker-starter install",
+    "demo": "pnpm --dir demo/reaction-picker-prototype dev",
+    "demo:build": "pnpm --dir demo/reaction-picker-prototype build",
+    "demo:starter": "pnpm --dir demo/reaction-picker-starter dev"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.19.1",
+    "@slidev/theme-default": "^0.25.0"
+  },
+  "packageManager": "pnpm@11.3.0"
+}
