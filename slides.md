@@ -162,5 +162,5 @@ Share the slide deck and demo repositories, Matt Pocock's skills repository, and
 <!--
 Appendix — prototype reference
 
-The image is the completed reference, not the live outcome. Open the live prototype at http://127.0.0.1:5175. If live work stalls, switch to the prebuilt reference on port 5174.
+The image is the completed prototype. Live Preview opens the hosted version on GitHub Pages; GitHub opens its source folder in this repository. For the on-stage live build, use http://127.0.0.1:5175; the local fallback remains on port 5174.
 -->

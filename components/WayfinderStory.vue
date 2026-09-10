@@ -89,7 +89,7 @@ const types=[
     </template>
 
     <template v-else>
-      <div class="demo"><section><span class="stamp">APPENDIX</span><h1>Prototype That I built</h1></section><div class="preview"><img src="/demo/reaction-picker.png" alt="Completed reaction picker"><div><a href="http://127.0.0.1:5175" target="_blank">LIVE PROTOTYPE ↗</a><a href="http://127.0.0.1:5174" target="_blank">REFERENCE ↗</a></div></div></div>
+      <div class="demo"><section><span class="stamp">APPENDIX</span><h1>Prototype That I built</h1></section><div class="preview"><img src="/demo/reaction-picker.png" alt="Completed reaction picker"><div><a href="https://alp82.github.io/slides-agentic-project-manager/demo/reaction-picker/" target="_blank" rel="noopener noreferrer">LIVE PREVIEW ↗</a><a href="https://github.com/alp82/slides-agentic-project-manager/tree/main/demo/reaction-picker-prototype" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></div></div></div>
     </template>
   </main>
 </article>
