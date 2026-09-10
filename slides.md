@@ -139,6 +139,16 @@ Invite questions and ask where the audience currently loses project context.
 
 ---
 
+<DeckInsert kind="resources" />
+
+<!--
+Resources
+
+Share the slide deck and demo repositories, Matt Pocock's skills repository, and the AI Hero Wayfinder documentation.
+-->
+
+---
+
 <WayfinderStory :step="9" />
 
 <!--
