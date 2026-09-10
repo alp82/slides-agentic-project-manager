@@ -70,7 +70,7 @@ function toggle() { expanded.value = !expanded.value; publish() }
     </aside>
     <div class="terminal-actions" :class="{ expanded }">
       <Transition name="prompt-slide">
-        <PromptTyper v-if="expanded && slidePrompt" :prompt="slidePrompt" />
+        <PromptTyper v-if="slidePrompt" :prompt="slidePrompt.prompt" :label="slidePrompt.label" :subtle="!expanded" :disabled="!expanded" />
       </Transition>
       <button class="terminal-slide-toggle" :aria-expanded="expanded" :aria-label="expanded ? 'hide terminal' : 'show terminal'" :title="expanded ? 'Hide terminal' : 'Show terminal'" @click.stop="toggle">
         <span class="terminal-toggle-icon" aria-hidden="true"><i/><i/><i/><b>&gt;_</b></span>

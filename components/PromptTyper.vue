@@ -3,6 +3,9 @@ import { onUnmounted, ref } from 'vue'
 
 const props = defineProps({
   prompt: { type: String, required: true },
+  label: { type: String, required: true },
+  subtle: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
 })
 
 const enabled = import.meta.env.DEV && import.meta.env.VITE_LIVE_TERMINAL === '1'
@@ -10,7 +13,7 @@ const state = ref('idle')
 let cooldown
 
 async function typePrompt() {
-  if (!props.prompt || state.value !== 'idle') return
+  if (props.disabled || !props.prompt || state.value !== 'idle') return
   state.value = 'typing'
   cooldown = setTimeout(() => { state.value = 'idle' }, 3000)
   try {
@@ -32,11 +35,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="enabled" class="prompt-typer" @click.stop @keydown.stop>
-    <button class="prompt-trigger" type="button" :disabled="state !== 'idle'" @click="typePrompt">
+  <div v-if="enabled" class="prompt-typer" :class="{ subtle }" @click.stop @keydown.stop>
+    <button class="prompt-trigger" :class="{ unavailable: disabled }" type="button" :disabled="disabled || state !== 'idle'" :title="disabled ? 'Show the terminal to enter a prompt' : undefined" @click="typePrompt">
       <span class="text-icon" aria-hidden="true"><b>Abc</b><i>↳</i></span>
       <span class="prompt-label">
-        <small>{{ state === 'error' ? 'connection error' : 'example prompt' }}</small>
+        <small>{{ state === 'error' ? 'connection error' : label }}</small>
         <strong>{{ state === 'typing' ? 'typing…' : state === 'done' ? 'prompt entered' : state === 'error' ? 'terminal unavailable' : 'enter prompt' }}</strong>
       </span>
     </button>
@@ -53,8 +56,15 @@ onUnmounted(() => {
 .prompt-label small { color: #bce1c9; font: 700 10px ui-monospace, monospace; text-transform: uppercase; letter-spacing: .13em; }
 .prompt-label strong { margin-top: 2px; font: 700 14px ui-monospace, monospace; text-transform: uppercase; letter-spacing: .045em; }
 .prompt-trigger:hover:not(:disabled) { background: #21413e; transform: translateY(-1px); }
+.prompt-trigger, .text-icon, .prompt-label small { transition: background-color .24s ease, border-color .24s ease, color .24s ease, box-shadow .24s ease; }
+.subtle .prompt-trigger { background: transparent; color: #17302e; border-color: #17302e40; box-shadow: 0 3px 0 #ee573140; }
+.subtle .text-icon { background: transparent; color: #17302e; border-color: #17302e60; }
+.subtle .prompt-label small { color: #526763; }
+.subtle .prompt-trigger:hover:not(:disabled) { background: #17302e0d; }
 .prompt-trigger:focus-visible { outline: 3px solid #ee5731; outline-offset: 3px; }
 .prompt-trigger:disabled { opacity: .62; cursor: wait; box-shadow: 0 1px 0 #ee5731; transform: translateY(2px); }
 .prompt-trigger:disabled .text-icon b { animation: terminal-cursor .45s steps(1) infinite alternate; }
+.prompt-trigger.unavailable { cursor: not-allowed; }
+.prompt-trigger.unavailable .text-icon b { animation: none; }
 @keyframes terminal-cursor { to { color: #ee5731; } }
 </style>

@@ -17,7 +17,7 @@ Run these in separate terminals:
 
 Keep the prompt page on the presenter display. It has editable text and Copy buttons; replace map numbers and ticket titles with those actually created. Regenerate it with `pnpm demo:prompts` after editing the prompt blocks below.
 
-Open the live tracker from the prompt page or slide 3 and select the newly created map. During the prototype highlight, open the live app using slide 8 or the prompt page, move that window to the audience display, and return to the audience deck afterward. Window switching leaves Claude running in tmux. Hide the terminal for full-size slide explanations; show it again when returning to the agent. The slide 8 screenshot is explicitly the completed reference, captured from the working POC, not a predetermined live result.
+Open the live tracker from the prompt page or slide 4 and select the newly created map. During the prototype highlight, open the live app using slide 9 or the prompt page, move that window to the audience display, and return to the audience deck afterward. Window switching leaves Claude running in tmux. Hide the terminal for full-size slide explanations; show it again when returning to the agent. The slide 9 screenshot is explicitly the completed reference, captured from the working POC, not a predetermined live result.
 
 If live work stalls, open the completed reference and identify it as prebuilt. If GIF access fails, demonstrate the independent emoji interaction and the unavailable/Retry state. If the embedded terminal fails, use `tmux attach -t wayfinder-live-demo`. Static slides retain the app screenshot, links, and QR; local app links require the corresponding servers. No recorded charting session or extra prepared checkpoints are supplied.
 
@@ -25,45 +25,43 @@ If live work stalls, open the completed reference and identify it as prebuilt. I
 
 The blocks use Claude Code's `/wayfinder` invocation. Each numbered step starts a fresh session. Answer human questions in that step's session; the agent cannot make the audience's decisions for them.
 
-### 1. Chart
+### 1. Chart — slide 5
 
 ```text
-/wayfinder I want to build a fun little reaction picker for finding and copying GIFs and emoji into conversations—help me figure it out, explore the design with me, and build it. This is a live demo: create exactly one research, one grilling, one prototype, and one execution task ticket, and keep grilling short.
+/wayfinder Help me plan and build a small GIF picker for finding and copying GIFs into conversations. This is a live meeting demo: keep it small, ask at most two questions before charting, and wait for my answers. Create one research, one grilling, one prototype, and one execution ticket; include building in the map’s scope. Start research after charting, then stop.
 ```
 
 Let charting finish. It may launch the research worker; inspect that ticket's outcome instead of starting a duplicate. The research question is real: whether the installed picker supplies the interaction we need, and what copying GIFs actually supports. Research and grilling are independent; prototype waits for both.
 
-### 2. Grill with the audience
+### 2. Grill with the audience — slide 7
 
 ```text
-/wayfinder 1 Work “<grilling ticket title>” with me; let's ask the audience what the smallest useful find-and-copy interaction should be.
+/wayfinder <map> Work the grilling ticket with me. Keep this live meeting session short: ask at most two important questions, one at a time, and wait for my answers. Keep the picker small, record our decision, then stop.
 ```
 
 Invite input and give the presenter's own answer. The reference chose shared search and one-click copy without a separate preview; the room can inform the live decision. Wait for both research and grilling to resolve before the scope change.
 
-### 3. Change scope halfway through
+### 3. Change scope halfway through — slide 9
 
-```text
-Update 1 for this audience-selected change: <change>. Keep the same four tickets, revise affected tickets and dependencies, and explicitly amend affected resolutions while preserving their history; stop before prototyping.
-```
+No preset prompt on slide 9. The presenter writes the audience-selected scope change live.
 
 Invite suggestions freely and choose one manageable change that affects the prototype and execution. Concrete examples from the POC include putting emoji above GIFs or loading more GIFs as you scroll; use one only if it changes the live map's current decision. If a resolution's question needs reopening, finish that decision in its own session before advancing.
 
-### 4. Prototype the revised idea
+### 4. Prototype the revised idea — slide 10
 
 ```text
-/wayfinder 1 Work “<prototype ticket title>”: show us visual options for the revised scope and let me react before recording the choice.
+/wayfinder <map> Work the prototype ticket for the revised scope. Show two simple variations in the local app that are vastly distinct visually: different layouts, typography, and overall style, not just colors. Keep this live demo small and wait for my feedback before recording the choice; stop before execution.
 ```
 
 Show the result, invite reactions, and make the final design choice. This is the visual highlight. The ticket should preserve its runnable artifact and decision for the next session.
 
-### 5. Execute during Q&A
+### 5. Execute — slide 12
 
 ```text
-/wayfinder 1 Work “<execution ticket title>”: build the agreed reaction picker from the reviewed prototype, check the core interactions, and record the result and any limitations.
+/wayfinder <map> Work the execution ticket. Build the agreed picker from the chosen prototype, keep to the agreed scope, check the core search and copy interactions, and record what works and any limitations.
 ```
 
-Start after the prototype resolves, immediately before Q&A. It may continue past the end of the talk; completion on stage is not required.
+Start on slide 12 after the prototype resolves, and let execution continue during Q&A. It may continue past the end of the talk; completion on stage is not required.
 
 ## Interleave the slides
 

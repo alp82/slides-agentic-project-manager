@@ -28,6 +28,14 @@ Introduce Alper Ortac briefly: a builder experimenting with practical agent work
 
 ---
 
+<DeckInsert kind="goal" />
+
+<!--
+The goal of this talk: plan and build a GIF search app with Wayfinder. Follow the idea through decisions and into a working app.
+-->
+
+---
+
 <DeckInsert kind="skills" />
 
 <!--
