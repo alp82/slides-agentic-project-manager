@@ -19,3 +19,7 @@ The closing slide cues execution before Q&A. It does not promise completion duri
 ## Slide 5 map design
 
 Selected prototype C (Territories) for its clear status groups and prominent frontier. The final component is `components/MapTerritories.vue`. The three original variants are archived on the local branch `prototype/slide-5-map`, in `components/MapPrototype.vue`; its commit records the design question and user verdict.
+
+## Slide 4 skill introduction
+
+The user selected B (Field guide), the editorial split, with the title “Start with a rough description of your goal”. The permanent layout is `components/WayfinderSkill.vue`. The original three variants and switcher are archived on the local branch `prototype/slide-4-skill`, in `components/WayfinderSkillPrototype.vue`; the archive commit records the design question and verdict.

@@ -81,19 +81,9 @@ Point at native GitHub dependencies. Open + unblocked + unassigned is available 
 <WayfinderStory :step="5" />
 
 <!--
-Scope changes are totally fine
+Scope changes are normal
 
 After research and grilling: invite suggestions, select one change, then show the agent revising the same four tickets before prototyping. Preserve original decisions and append explicit amendments; reopen only if a question needs more work. Keep this demonstration to the same four tickets.
--->
-
----
-
-<WayfinderStory :step="6" />
-
-<!--
-Lifecycle of a map
-
-Show a closed ticket’s resolution and its named map link. Context needs maintaining; a fresh session still reads the relevant detail.
 -->
 
 ---
@@ -101,9 +91,9 @@ Show a closed ticket’s resolution and its named map link. Context needs mainta
 <WayfinderStory :step="7" />
 
 <!--
-Maps can guide many kinds of work
+My experience: wayfinder is great for building too
 
-Use these examples to widen the audience's mental model before the close: planning, execution, investigation, and physical projects all benefit from preserved decisions and explicit dependencies.
+The default is planning: a decision map does not build the result itself. Explicitly include execution in scope to coordinate the work as well. Use the examples to discuss research, events, woodworking, talks, workshops, and customer studies. Agents can do digital work and coordinate steps that humans carry out in the physical world.
 -->
 
 ---
@@ -111,9 +101,19 @@ Use these examples to widen the audience's mental model before the close: planni
 <WayfinderStory :step="8" />
 
 <!--
-Challenges
+Too many questions
 
-Grilling can become exhausting when the agent explores branches that do not earn their complexity. Use Alper's instruction to avoid overengineering. Parallel frontier execution is possible, but verify that tickets do not share implementation seams or duplicate investigation first.
+The agent can get stuck on small details. Tell it to keep things simple and focus on decisions that matter. Use the linked post as an example of a short instruction.
+-->
+
+---
+
+<WayfinderStory :step="10" />
+
+<!--
+Working at the same time
+
+Agents can edit the same files, repeat work, or make conflicting decisions. Check for overlap and give each agent separate work. When one needs the other's result, run them one at a time.
 -->
 
 ---
