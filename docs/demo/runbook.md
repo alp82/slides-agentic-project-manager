@@ -1,145 +1,80 @@
-# Reaction picker: demo runbook and prompts
+# Live reaction-picker prompts
 
-> Unvalidated reference: the agent created this runbook prematurely during a planning-only wayfinder session. The user has not approved its sequence, implementation scope, or prompts. The [presentation map](../../.scratch/wayfinder-meetup/map.md) is canonical; this document must not be treated as an execution instruction for the current charting effort.
+Use Claude Code in `/home/alp/dev/reaction-picker-wayfinder-demo`, with the separate [demo repository](https://github.com/alp82/reaction-picker-wayfinder-demo) as its GitHub origin. The standalone checkout is the live starter; the prebuilt POC in this presentation repository is `demo/reaction-picker-prototype` (`pnpm demo`, port 5174).
 
-Status: prepared POC and starter, with draft prompts derived from the implementation. Builds and browser interactions were checked; real provider credentials were not. These prompts have not been rehearsed or timed in a harness. Audience: mixed technical meetup. Slot: 8 minutes slides, 17 minutes demo, 5 minutes Q&A. Rehearsal is outside this effort.
+Start the starter with `pnpm dev` in the standalone checkout (port 5175). `CLAUDE.md` carries the standing demo context: prepared dependencies, KLIPY, four ticket types, scope-change rules, and the execution override to record in the map's Notes. The starter has no picker behavior and no pre-created map.
 
-## The point of the demo
+## Launch and switch
 
-“I want a fun reaction picker” is a destination with open questions. The agent helps expose those questions, gather facts, maintain the map, and carry context forward. The human chooses the scope and reacts to the result. The picker itself does not need AI.
+Run these in separate terminals:
 
-Show one harness throughout: either Claude Code or Codex. Start the harness in `demo/reaction-picker-starter` so the live project is separate from the POC. Use local Markdown for a low-setup tracker unless the presenter chooses a configured issue tracker. Install Matt's skills and run project setup before the event; do not spend the 17 minutes installing tools or obtaining credentials. [Matt's installation instructions](https://github.com/mattpocock/skills#installation-30-second-setup)
-
-## Prepared artifacts
-
-| Artifact | Run / open | Purpose |
+| Surface | Command and working directory | URL |
 | --- | --- | --- |
-| Completed POC | `pnpm demo` → http://127.0.0.1:5174 | Reference and fallback; openly identify it as prebuilt. |
-| Starting scaffold | `pnpm demo:starter` → http://127.0.0.1:5175 | Live work; dependencies and landing page only. |
-| Research | [Provider and component findings](../research/visual-demo-ideas.md) | Evidence to inspect or use if live research is slow. |
-| Layouts | POC `/?variant=A`, `B`, or `C` | Studio, Spotlight, and Compact options; no winner selected yet. |
+| Deck + Claude | `pnpm present` in this presentation repo | Presenter: http://localhost:3047/presenter/1 · audience: http://localhost:3047/1 |
+| Completed reference | `pnpm demo` in this presentation repo | http://127.0.0.1:5174 |
+| Live starter / prototype | `pnpm dev` in `/home/alp/dev/reaction-picker-wayfinder-demo` | http://127.0.0.1:5175 |
+| Copyable prompts | Open after starting the deck | http://localhost:3047/demo/prompts.html |
 
-Run `pnpm demo:install` from the presentation root once. Configure the chosen key in each app's `.env.local` using `.env.example`; restart servers after changes. The default provider is GIPHY, and KLIPY is a configuration option, not a settled presenter choice. The key stays out of prompts. The POC's missing-key screen is intentional; emoji work immediately.
+Keep the prompt page on the presenter display. It has editable text and Copy buttons; replace map numbers and ticket titles with those actually created. Regenerate it with `pnpm demo:prompts` after editing the prompt blocks below.
 
-## Seventeen-minute route
+Open the live tracker from the prompt page or slide 3 and select the newly created map. During the prototype highlight, open the live app using slide 8 or the prompt page, move that window to the audience display, and return to the audience deck afterward. Window switching leaves Claude running in tmux. Hide the terminal for full-size slide explanations; show it again when returning to the agent. The slide 8 screenshot is explicitly the completed reference, captured from the working POC, not a predetermined live result.
 
-This is a target allocation, not a measured promise about agent speed. Move to prepared evidence or the finished POC whenever a stage overruns. Do not rush through unanswered human decisions to force the clock.
+If live work stalls, open the completed reference and identify it as prebuilt. If GIF access fails, demonstrate the independent emoji interaction and the unavailable/Retry state. If the embedded terminal fails, use `tmux attach -t wayfinder-live-demo`. Static slides retain the app screenshot, links, and QR; local app links require the corresponding servers. No recorded charting session or extra prepared checkpoints are supplied.
 
-| Demo time | Action | What to explain |
-| --- | --- | --- |
-| 0–2 | Show the scaffold and state the loose idea. | “I prepared the tools and built a reference beforehand. We'll make a small part of the journey live.” |
-| 2–5 | Chart with prompt 1; answer the agent's first round. | Destination, decision tickets, dependencies, and what remains unknown. Charting ends before working a ticket. |
-| 5–7 | Inspect the research ticket or the prepared research note. | Existing picker; GIPHY/KLIPY support; provider access is a fact, provider choice is ours. Do not wait indefinitely for a remote research call. |
-| 7–12 | In a fresh session, work one visual prototype ticket with prompt 2. | Ask for a rough artifact, react to it, decide what matters. If it takes longer, compare the openly prebuilt layouts. |
-| 12–15 | If the prototype decision is resolved, use prompt 3 in a fresh session for a bounded implementation step. | Explicit execution scope; a visible result grounded in a decision. If prerequisite decisions remain open, show the completed POC instead. |
-| 15–17 | Show the completed POC and use prompt 4 if time allows. | The map remembers the answer and makes the next session's starting point clear. Close on the useful outcome. |
+## Copy prompts
 
-Do not paste all prompts into one session. Wayfinder charts first and resolves at most one non-research ticket per work session. Research tickets can run in parallel. If a research ticket was automatically started during charting, inspect its result instead of launching a duplicate. The skill defaults to planning; the execution override below is explicit. [Wayfinder instructions](https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md)
+The blocks use Claude Code's `/wayfinder` invocation. Each numbered step starts a fresh session. Answer human questions in that step's session; the agent cannot make the audience's decisions for them.
 
-## Prompt 1 — chart the reaction picker
-
-Paste in the prepared starter. Invoke the installed wayfinder skill using the harness's normal skill syntax; `$wayfinder` below names the intended skill.
+### 1. Chart
 
 ```text
-$wayfinder
-
-I want a fun, simple reaction picker: find a GIF or emoji, see it big,
-and copy it into a conversation. This is for a live demo to a mixed
-technical audience, so the result should be easy to see on a projector.
-
-We're in a prepared Vite + React + TypeScript starter. Dependencies
-include gif-picker-react 2.0.0 and @emoji-mart/data. A GIF provider key
-will be in .env.local; don't print or inspect its value. Inspect
-.env.example to understand the configuration shape.
-
-The destination is a working local POC. In the map's Notes, explicitly
-allow execution after the decisions that scope it are settled.
-No accounts for app users, backend, uploads, GIF editing, or chat integrations.
-Use the project's configured tracker, with local Markdown as fallback.
-
-Start by clarifying the destination and surfacing the decisions. Include
-research on the existing picker and a visual prototype question where
-useful. Keep the map small and leave genuinely unclear later work in fog.
-Chart this session; don't start implementation or answer my decisions for me.
+/wayfinder I want to build a fun little reaction picker for finding and copying GIFs and emoji into conversations—help me figure it out, explore the design with me, and build it. This is a live demo: create exactly one research, one grilling, one prototype, and one execution task ticket, and keep grilling short.
 ```
 
-Facts and preferences the presenter can use when responding, not a script for the agent to impersonate:
+Let charting finish. It may launch the research worker; inspect that ticket's outcome instead of starting a duplicate. The research question is real: whether the installed picker supplies the interaction we need, and what copying GIFs actually supports. Research and grilling are independent; prototype waits for both.
 
-- Selected project: reaction picker, useful for quick chat reactions.
-- Minimum result: GIF/emoji choice, search, large preview, copy text or media link.
-- Emoji should work with bundled data; GIFs use the one provider configured before the event.
-- Research already found both GIPHY and KLIPY support in `gif-picker-react` 2.0.0.
-- Prioritize a legible preview over extras. Layout is a real choice: invite the room to react.
-- No need for an AI model inside the app.
-
-## Prompt 2 — work one visual decision
-
-Start a fresh session. Replace `[map path]` and `[visual ticket title]` with the actual map and ticket created in the prior session. First check the ticket is unblocked; resolve its prerequisites in separate sessions or switch to prepared evidence if time is short.
+### 2. Grill with the audience
 
 ```text
-$wayfinder [map path]
-
-Work the ticket titled “[visual ticket title]”. Claim it before working.
-Read only the related decisions needed for this ticket.
-
-Use the prototype skill to make a cheap visual comparison I can react to.
-We need to understand whether finding, previewing, and copying a reaction
-is clearest side by side, with the preview first, or in a compact chat context.
-Use the installed dependencies and keep this local. Emoji are enough to
-compare layouts if a live GIF connection would delay this decision.
-
-Show the artifact and ask for my reaction. Don't choose the winner or
-resolve the ticket until I have actually answered. End after this decision;
-record my answer on its ticket and link it from the map.
+/wayfinder 1 Work “<grilling ticket title>” with me; let's ask the audience what the smallest useful find-and-copy interaction should be.
 ```
 
-If you use the existing POC to get feedback, say so explicitly and point the agent at the chosen layout as evidence after the audience answers. Do not imply it was generated during this session.
+Invite input and give the presenter's own answer. The reference chose shared search and one-click copy without a separate preview; the room can inform the live decision. Wait for both research and grilling to resolve before the scope change.
 
-## Prompt 3 — one visible execution step
-
-Use only after the layout/prototype decision is resolved and a working emoji selection/preview exists. The map's Notes must carry the execution override. Start a new session. If the prototype lacks those basics, hand off the agreed core scope for implementation instead, and use the finished POC to show the outcome.
+### 3. Change scope halfway through
 
 ```text
-Continue from [map path] and its resolved visual decision.
-Execution is allowed by this effort's Notes. Add this one bounded change
-to the existing working reaction picker: recent emoji.
-
-After I select an emoji, put it at the front of a row of at most eight
-unique recent emoji. Selecting it again moves it to the front. Clicking
-a recent emoji selects it for the same preview and copy action. Include
-an empty state and a Clear button. Keep it in memory: reload clears it.
-Don't save GIF media or URLs in recents. Leave the GIF provider unchanged.
-
-Track this implementation step under the map using the configured tracker.
-Run the build and check select, reselect, clear, and reload in the browser.
-Record what was completed and any remaining limitations. Don't take
-another decision ticket in this session.
+Update 1 for this audience-selected change: <change>. Keep the same four tickets, revise affected tickets and dependencies, and explicitly amend affected resolutions while preserving their history; stop before prototyping.
 ```
 
-This behavior is implemented in the completed POC. It is a reference for the scope, not evidence that another agent can finish in three minutes.
+Invite suggestions freely and choose one manageable change that affects the prototype and execution. Concrete examples from the POC include putting emoji above GIFs or loading more GIFs as you scroll; use one only if it changes the live map's current decision. If a resolution's question needs reopening, finish that decision in its own session before advancing.
 
-## Prompt 4 — show the value of saved context
+### 4. Prototype the revised idea
 
 ```text
-Read [map path]. Summarize the destination, decisions already made,
-and the next unblocked, unclaimed ticket by name. Explain why it is
-takeable now. Do not claim or resolve anything; this is a read-only handoff.
+/wayfinder 1 Work “<prototype ticket title>”: show us visual options for the revised scope and let me react before recording the choice.
 ```
 
-## If a stage takes too long
+Show the result, invite reactions, and make the final design choice. This is the visual highlight. The ticket should preserve its runnable artifact and decision for the next session.
 
-- Research: show the prepared primary-source note and explain what changed because of it.
-- Generation: switch to the completed POC, explicitly naming it as prebuilt. Make a human choice using its layouts.
-- Provider/network: show the actual disconnected state and continue with emoji; no fake GIF results are included in the app.
-- Context/session: open the map and a ticket directly. Their purpose is visible without a second live generation.
+### 5. Execute during Q&A
 
-The POC and starter are separate directories and ports. Keep the POC running as the fallback. No destructive reset command is needed.
+```text
+/wayfinder 1 Work “<execution ticket title>”: build the agreed reaction picker from the reviewed prototype, check the core interactions, and record the result and any limitations.
+```
 
-## Remaining presenter choices
+Start after the prototype resolves, immediately before Q&A. It may continue past the end of the talk; completion on stage is not required.
 
-- Studio, Spotlight, or Compact as the reference layout.
-- Claude Code or Codex on stage.
-- GIPHY or KLIPY with a verified key and satisfactory sample searches.
-- Whether to show fresh charting or an openly prepared map if live decision rounds exceed the allocation.
+## Interleave the slides
 
-The deck should describe benefits as expected mechanisms—less reconstructing context, visible decisions, scoped next steps—until the presenter supplies personal examples. Do not invent time-saved figures.
+Use about eight minutes of slides and seventeen minutes of live work in aggregate, followed by five minutes Q&A. Explain skills and the harness around charting; ticket types and dependencies around research/grilling; saved context and amended decisions around the scope change; return to the app for prototyping. These are placements, not a consecutive timing script. No additional research/prototype checkpoints are prepared.
+
+## Preparation and verification
+
+The starter is deliberately separate from the completed POC. The reference's actual work supplies the prompts: testing an existing picker, narrowing interaction scope, choosing a visual composition, handling GIF copy limits, and refining ordering/pagination. The full POC design is not a predetermined answer for the live audience.
+
+Starter dependency installation and production build are checked during preparation. No live chart, research worker, audience exchange, or end-to-end prompt run has been rehearsed or timed. The [terminal setup](../../demo/terminal/README.md) records verified Claude Code authentication, workspace trust, live `/wayfinder` discovery, and embedded-terminal launch/fallback. Native paste into an intended chat app, the full skill flow, physical clicker/projector behavior, and network-outage recovery remain unverified; see [package validation](validation.md). These are not claimed by the automated integration checks.
+
+The reference README records successful live KLIPY search/media loading and the remaining native animated-GIF clipboard limits. The starter consumes its own ignored `.env.local`; the landing page cannot validate provider access. If GIF access fails in the eventual app, retain independent local emoji and show an honest unavailable state with Retry.
+
+Terminal setup belongs to [Prepare and validate the chosen live terminal surface](https://github.com/alp82/slides-agentic-project-manager/issues/12). Final assembly belongs to [Finish the interleaved deck and demo package](https://github.com/alp82/slides-agentic-project-manager/issues/13). Rehearsal and timing are out of scope.

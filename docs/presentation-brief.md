@@ -2,14 +2,17 @@
 
 ## Agreed destination
 
-A finished slide deck for a local AI meetup, including a live demo. Rehearsal is out of scope.
+A finished slide deck for a local AI meetup, a complete reaction-picker POC app, a prepared live-demo starter in the separate `reaction-picker-wayfinder-demo` repository, and simple prompts derived from building the POC. Rehearsal is out of scope.
 
-The current wayfinder effort charts a clear route to those deliverables. The user explicitly clarified that planning a prebuilt POC is not authorization to implement it during charting. There is no execution override for this map.
+The map includes building and integrating these deliverables. Its execution scope is explicit: it is complete when the deck, POC, starter, and short prompts exist and meet their agreed criteria, not when a plan is written. Charting itself updates that work map; it does not start every build ticket immediately.
+
+The POC and slides should progress in parallel, with dependencies only where one actually needs the other's result. Prompt derivation waits for the working POC; final integration brings the branches together.
 
 ## Audience and timing
 
 - Mixed technical audience: data scientists, engineers, product people, founders, and others.
 - 30 minutes total: 8 minutes of slides, 17 minutes of demo, 5 minutes of Q&A.
+- These are approximate totals across an interleaved talk, not three consecutive blocks. Switch between presentation and live demo to fill agent wait times with relevant explanations.
 
 ## Message and audience action
 
@@ -23,18 +26,18 @@ Explain skill instructions, decision tickets, dependencies, and how context carr
 
 ## Demo preferences
 
-The selected demo is a reaction picker with GIFs and emoji: fun, visual, simple, and potentially useful. The user identified `gif-picker-react`, whose GIPHY and KLIPY support is verified. The proposed core is search, a large preview, and copying emoji or GIF links.
+The delivered reference is a reaction picker with shared search, independent local emoji, a KLIPY GIF gallery, and direct copying with honest GIF URL fallback. The current POC places emoji first and appends GIFs on scroll. There is no separate preview.
 
-Plan for a prepared scaffold and a prebuilt complete POC from which to derive demo prompts. The agent prematurely created app directories and a [runbook](demo/runbook.md); these are unvalidated reference material, not approved scope or demonstration flow. Recent emoji, the three layouts, the GIPHY default, and the exact prompts remain agent proposals.
+The complete POC lives in this repository; the prepared starter lives in the separate demo repository. The [runbook](demo/runbook.md) and generated presenter page contain five short prompts derived from the POC, with standing context in the starter. Audience decisions can change the live result.
 
-Claude Code and Codex are both acceptable to the presenter. The on-stage harness and issue tracker are not yet selected.
+The selected on-stage setup is Claude Code in a persistent side-by-side terminal, with an ordinary tmux attachment as fallback. The [terminal guide](../demo/terminal/README.md) supplies launch and switching instructions.
 
-## Open decisions
+## Slide direction
 
-- Smallest satisfying reaction-picker scope and GIF provider.
-- On-stage harness and issue tracker.
-- Which prepared states to show if live charting or generation takes longer than the allocated time.
-- Narrative and slide sequence within eight minutes.
-- Presenter experience or concrete examples supporting the benefits claimed.
+The presenter accepted the revised big-idea direction. [Shape the slide story and visual direction](https://github.com/alp82/slides-agentic-project-manager/issues/4) holds the palette, varied slide sequence, prototype source, and asset handoff for the deck build.
 
-This brief records the conversation. The [presentation map](../.scratch/wayfinder-meetup/map.md) tracks remaining decisions toward the finished deck.
+## Delivery
+
+The deck, reference app, separate starter, short prompts, and switching paths are integrated. The [package validation](demo/validation.md) records evidence and limits. Rehearsal and timing remain out of scope; physical projector and native paste behavior are not claimed as verified.
+
+The [presentation map](https://github.com/alp82/slides-agentic-project-manager/issues/1) and its decision tickets remain canonical for the accepted choices.

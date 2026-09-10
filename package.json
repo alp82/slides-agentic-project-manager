@@ -6,10 +6,11 @@
     "dev": "slidev --open",
     "build": "slidev build",
     "export": "slidev export",
-    "demo:install": "pnpm --dir demo/reaction-picker-prototype install && pnpm --dir demo/reaction-picker-starter install",
+    "demo:install": "pnpm --dir demo/reaction-picker-prototype install",
     "demo": "pnpm --dir demo/reaction-picker-prototype dev",
     "demo:build": "pnpm --dir demo/reaction-picker-prototype build",
-    "demo:starter": "pnpm --dir demo/reaction-picker-starter dev"
+    "present": "bash demo/terminal/start.sh",
+    "demo:prompts": "node scripts/build-demo-prompts.mjs"
   },
   "dependencies": {
     "@slidev/cli": "^52.19.1",
