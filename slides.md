@@ -10,7 +10,7 @@ drawings:
   persist: false
 ---
 
-<WayfinderStory :step="0" />
+<TitleSlide />
 
 <!--
 Agentic Project Manager — From generating code to driving decisions
@@ -81,7 +81,7 @@ Research finds a component. Keep the scope conversation short. Execution is expl
 <!--
 Find the frontier
 
-Point at native GitHub dependencies. Open + unblocked + unassigned is available to claim. The presenter still owns the decisions. Claim by assigning the ticket before work. Resolve by recording an answer on the ticket, closing it, and adding a named link to the map. Newly sharp questions become tickets; dependencies expose the frontier.
+This graph is an illustrative GIF picker example, not the live project state. Arrows run from prerequisites to dependent tickets. The agent tracks prerequisites, closes resolved tickets, and recomputes the frontier. Point at native GitHub dependencies. Open + unblocked + unassigned is available to claim. The presenter still owns the decisions. Claim by assigning the ticket before work. Resolve by recording an answer on the ticket, closing it, and adding a named link to the map. Newly sharp questions become tickets; dependencies expose the frontier.
 -->
 
 ---
